@@ -1,3 +1,4 @@
+import { clearConfigCache } from 'prettier';
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
@@ -21,6 +22,10 @@ export default function Login() {
 
     // TODO: If login was unsuccessful, set an error with a message
     // to display to the user that their login failed.
+    !loginWasSuccessful
+      ? alert('you username and password dont match')
+      : console.log('yay!');
+
     //
     // If login was successful, use the history hook
     // from React Router to replace the current URL with the URL
@@ -37,12 +42,14 @@ export default function Login() {
           id="email"
           name="email"
           type="email"
-        />{' '}
+          onChange={(event) => handleFormChange(event)}
+        />
         <label>Password</label>
         <input
           id="password"
           name="password"
           type="password"
+          onChange={(event) => handleFormChange(event)}
         />
         <button type="submit" aria-label="Sign In">
           Sign in
