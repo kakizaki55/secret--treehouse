@@ -24,7 +24,7 @@ export default function Login() {
     // to display to the user that their login failed.
     !loginWasSuccessful
       ? alert('you username and password dont match')
-      : console.log('yay!');
+      : history.replace(from);
 
     //
     // If login was successful, use the history hook
