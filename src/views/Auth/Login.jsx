@@ -1,4 +1,3 @@
-import { clearConfigCache } from 'prettier';
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
@@ -12,27 +11,17 @@ export default function Login() {
   const { formState, handleFormChange } = useForm({ email: '', password: '' });
   const [error, setError] = useState(null);
 
-  // The `from` property of `location.state` gives us
-  // the URL to redirect to after logging in.
   const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = (event) => {
     event.preventDefault();
     const loginWasSuccessful = auth.login(formState.email, formState.password);
 
-    // TODO: If login was unsuccessful, set an error with a message
-    // to display to the user that their login failed.
     !loginWasSuccessful
       ? setError(
           'Login was unsuccessful, please check you user name and password and try again'
         )
       : history.replace(from);
-
-    //
-    // If login was successful, use the history hook
-    // from React Router to replace the current URL with the URL
-    // we need to redirect to.
-    // See https://v5.reactrouter.com/web/api/history for the appropriate method to use
   };
 
   return (
@@ -45,7 +34,8 @@ export default function Login() {
             id="email"
             name="email"
             type="email"
-            onChange={(event) => handleFormChange(event)}
+            value={formState.email}
+            onChange={handleFormChange}
           />
         </label>
         <label>
@@ -54,7 +44,8 @@ export default function Login() {
             id="password"
             name="password"
             type="password"
-            onChange={(event) => handleFormChange(event)}
+            value={formState.password}
+            onChange={handleFormChange}
           />
         </label>
         <button type="submit" aria-label="Sign In">
