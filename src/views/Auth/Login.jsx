@@ -23,7 +23,9 @@ export default function Login() {
     // TODO: If login was unsuccessful, set an error with a message
     // to display to the user that their login failed.
     !loginWasSuccessful
-      ? alert('you username and password dont match')
+      ? setError(
+          'Login was unsuccessful, please check you user name and password and try again'
+        )
       : history.replace(from);
 
     //
